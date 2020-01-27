@@ -1,32 +1,44 @@
-/**
- * Some predefined delays (in milliseconds).
- */
-export enum Delays {
-  Short = 500,
-  Medium = 2000,
-  Long = 5000,
+
+import * as inquirer from 'inquirer'
+
+import ceneoProducer from './producers/ceneoProducer'
+import ceneoWorker from './workers/ceneoWorker'
+
+const entityChoicesToHandlers = {
+  "Ceneo Producer": async () => {
+    let { urls } = await inquirer.prompt([{
+      type: 'input', name: "urls", message: "Enter JSON-valid array of URLs:",
+      validate(input) {
+        try {
+          JSON.parse(input)
+        } catch (e) {
+          return false
+        }
+        return true
+      }
+    }])
+    urls = JSON.parse(urls)
+    ceneoProducer(urls)
+  },
+  "Ceneo Worker": ceneoWorker
 }
 
-/**
- * Returns a Promise<string> that resolves after given time.
- *
- * @param {string} name - A name.
- * @param {number=} [delay=Delays.Medium] - Number of milliseconds to delay resolution of the Promise.
- * @returns {Promise<string>}
- */
-function delayedHello(
-  name: string,
-  delay: number = Delays.Medium,
-): Promise<string> {
-  return new Promise((resolve: (value?: string) => void) =>
-    setTimeout(() => resolve(`Hello, ${name}`), delay),
-  );
+const main = async () => {
+  const { entityType } = await inquirer.prompt([{ type: 'list', name: "entityType", message: "What would you like to run?", choices: Object.keys(entityChoicesToHandlers) }])
+  await entityChoicesToHandlers[entityType]();
 }
 
-// Below are examples of using ESLint errors suppression
-// Here it is suppressing missing return type definitions for greeter function
+const argv = require('optimist').argv
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export async function greeter(name: string) {
-  return await delayedHello(name, Delays.Long);
+if (argv.i) {
+  main()
 }
+else if (argv.s) {
+  const urls = JSON.parse(argv.s)
+  ceneoProducer(urls)
+}
+else if (argv.w) {
+  ceneoWorker()
+}
+else
+  main()

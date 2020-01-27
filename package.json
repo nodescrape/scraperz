@@ -2,18 +2,18 @@
   "name": "node-typescript-boilerplate",
   "version": "0.0.0",
   "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
-  "engines": {
-    "node": ">= 12.13 <13"
-  },
   "devDependencies": {
+    "@types/bull": "^3.12.0",
     "@types/jest": "~24.0.25",
     "@types/node": "~12.12.22",
+    "@types/redis": "^2.8.14",
     "@typescript-eslint/eslint-plugin": "~2.14.0",
     "@typescript-eslint/parser": "~2.14.0",
     "eslint": "~6.8.0",
     "eslint-config-prettier": "~6.9.0",
     "eslint-plugin-jest": "~23.2.0",
     "jest": "~24.9.0",
+    "nodemon": "^2.0.2",
     "prettier": "~1.19.1",
     "rimraf": "~3.0.0",
     "ts-jest": "~24.2.0",
@@ -26,11 +26,19 @@
     "build:watch": "tsc -w -p tsconfig.release.json",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "start:watch": "nodemon build/src/main.js",
+    "start": "node build/src/main.js"
   },
   "author": "Jakub Synowiec <github@jakubsynowiec.info>",
   "license": "Apache-2.0",
   "dependencies": {
+    "bull": "^3.12.1",
+    "cheerio": "^1.0.0-rc.3",
+    "inquirer": "^7.0.4",
+    "optimist": "^0.6.1",
+    "puppeteer": "^2.1.0",
+    "redis": "^2.8.0",
     "tslib": "~1.10.0"
   }
 }
