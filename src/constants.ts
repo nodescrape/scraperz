@@ -6,9 +6,7 @@ export const REDIS_HOST = "redis-12881.c92.us-east-1-3.ec2.cloud.redislabs.com"
 export const REDIS_PORT = 12881
 export const REDIS_PASSWORD = 'WfMzDWWN84Zlk8PiqUHXgtoSk4UiA8N9'
 
-
 export const MAIN_CENEO_QUEUE = 'c_queue'
-export const MAIN_CENEO_CHANNEL = 'c_channel'
 
 // REDIS - end
 

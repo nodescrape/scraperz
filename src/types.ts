@@ -1,10 +1,12 @@
+import { Job } from 'bull'
+
 export interface ScrapingResult {
     url: string
 }
 
-export interface CeneoJob {
+export type CeneoJob = Job<{
     url: string
-}
+}>
 
 export interface CeneoOffer {
     retailer: string,
@@ -17,8 +19,8 @@ export type CeneoResult = ScrapingResult & {
     totalOffers: number,
     minPrice: number,
     maxPrice: number,
-    mediamarktPrice: number,
-    mediaexpertPrice: number,
-    euroPrice: number,
+    mediamarktPrice?: number,
+    mediaexpertPrice?: number,
+    euroPrice?: number,
     allOffers: CeneoOffer[]
 }
