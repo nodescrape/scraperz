@@ -7,6 +7,7 @@ This is a scraper made to help you find great deals.
 1. **--i** - runs in interactive mode, you can manually select what you want to run. This is the default one.
 1. **--w** - runs in worker mode. Nothing to pass, worker is started.
 1. **--s** - runs in string mode, you have to pass a valid JSON string. Only producer available then.
+1. **--a** - runs bull arena.
 
 ### Test
 

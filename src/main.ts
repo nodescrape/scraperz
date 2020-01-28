@@ -1,5 +1,6 @@
 
 import * as inquirer from 'inquirer'
+import { arena } from './arena'
 
 import ceneoProducer from './producers/ceneoProducer'
 import ceneoWorker from './workers/ceneoWorker'
@@ -39,6 +40,9 @@ else if (argv.s) {
 }
 else if (argv.w) {
   ceneoWorker()
+}
+else if (argv.a) {
+  arena()
 }
 else
   main()
