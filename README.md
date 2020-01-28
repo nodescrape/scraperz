@@ -16,13 +16,15 @@ Clone the repository.
 
 Create an _.env_ file. See _.env.example_ for reference.
 
-Open two terminals in the project directory. In the first one paste and run:
+Open two terminals in the project directory. In the first one paste and run (don't worry if there will be errors during build):
 
 ```
 yarn
 yarn build
 yarn start --w
 ```
+
+
 
 in the second one paste and run:
 
