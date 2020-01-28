@@ -34,6 +34,8 @@ yarn start --s '["https://www.ceneo.pl/86198612"]'
 
 If you passed valid Redis credentials (_.env_ file) you should shortly be able to see a created JSON file with scraped data in it.
 
+Puppeteer is launched with head because of the fact that ceneo blocked headless mode.
+
 ### Client side scrapers
 
 Just copy a scraper you like, visit the respective site, paste the code into your console and invoke the function. 
