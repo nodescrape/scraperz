@@ -1,4 +1,4 @@
-import * as os from 'os'
+
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -19,9 +19,3 @@ export const DEFAULT_BULL_JOB_ATTEMPTS = 3
 export const DEFAULT_BULL_JOB_CONFIG = { attempts: DEFAULT_BULL_JOB_ATTEMPTS }
 
 // BULL - end
-
-// WORKERS - start
-
-export const AVAILABLE_CPUS = os.cpus().length
-
-// WORKERS - end
