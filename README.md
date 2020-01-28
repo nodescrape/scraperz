@@ -17,13 +17,15 @@ Clone the repository.
 
 Create an _.env_ file. See _.env.example_ for reference.
 
-Open two terminals in the project directory. In the first one paste and run:
+Open two terminals in the project directory. In the first one paste and run (don't worry if there will be errors during build):
 
 ```
 yarn
 yarn build
 yarn start --w
 ```
+
+
 
 in the second one paste and run:
 
@@ -32,6 +34,8 @@ yarn start --s '["https://www.ceneo.pl/86198612"]'
 ```
 
 If you passed valid Redis credentials (_.env_ file) you should shortly be able to see a created JSON file with scraped data in it.
+
+Puppeteer is launched with head because of the fact that ceneo blocked headless mode.
 
 ### Client side scrapers
 
