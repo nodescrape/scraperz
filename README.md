@@ -10,6 +10,8 @@ This is a scraper made to help you find great deals.
 
 ### Test
 
+This process assumes that you configured your machine for usage with puppeteer.
+
 Clone the repository.
 
 Create an _.env_ file. See _.env.example_ for reference.
