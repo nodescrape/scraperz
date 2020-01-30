@@ -1,3 +1,26 @@
+// It's redundant to create an object if values will be numeric
+// TODO: This approach is really inflexible
+const tabMap = [
+  "kategorie",
+  "rozmiar",
+  "marka",
+  "kolor",
+  "cena",
+  "sortowanie"
+]
+
+const toggleTab = (tab) => {
+  const tabIndex = tabMap.indexOf(tab)
+  if (tabIndex > -1) {
+    const el = $(".tabs___link___UQInA").eq(tabIndex).get()[0]
+    el.click()
+    return true
+  } else {
+    console.log(`There's no such tab: ${tab}`)
+    return false
+  }
+}
+
 // Scrape products of a zalando lounge campaign
 // TODO: Handle scrolling automatically
 const scrapeLounge = () => {
