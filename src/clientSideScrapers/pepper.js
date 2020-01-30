@@ -3,12 +3,7 @@ const pepperScraper = () => {
   // Remember to load artoo before calling this function
     const normalize = (str) => str.replace(/\n/g, '')
         .trim();
-    $('html, body')
-        .animate({
-            scrollTop: 10000
-        }, 50);
-    // This is kinda crappy, a better way has to be devised
-    setTimeout(() => console.log(artoo.scrape({
+    console.log(artoo.scrape({
         iterator: ".threadCardLayout--card",
         data: {
             name() {
@@ -31,5 +26,5 @@ const pepperScraper = () => {
                     .replace(',', '.')
             }
         }
-    })), 5000)
+    }))
 }

@@ -4,17 +4,28 @@ import * as cheerio from 'cheerio'
 import * as Queue from 'bull'
 import { wait } from '../utils'
 import { CeneoJob, CeneoResult, CeneoOffer } from '../types';
-import { MAIN_CENEO_QUEUE, AVAILABLE_CPUS, BULL_REDIS_CONFIG } from '../constants'
+import { MAIN_CENEO_QUEUE, BULL_REDIS_CONFIG } from '../constants'
 
 // TODO: Maybe this should be in constants?
 const RELAVANT_RETAILERS = ["mediaexpert", "mediamarkt", "euro"]
+const OFFER_SELECTOR = '.product-offer'
 
 const expandOffers = async (page) => {
     const remaining = await page.$eval('.remaining-offers-trigger', trigger => trigger.textContent)
-    console.log(remaining)
     await page.$eval('.remaining-offers-trigger', trigger => trigger.click())
-    // This is crap, but has to suffice for now
-    await wait(500)
+
+    const expectedNumberOfOffers = +remaining.match(/[0-9]+/)[0]
+
+    // Wait for all offers to load
+    for (let i = 0; i < 10; i++) {
+        const actualNumberOfOffers = (await page.$$(OFFER_SELECTOR)).length
+
+        if (actualNumberOfOffers < expectedNumberOfOffers) {
+            await wait(200)
+        } else {
+            break
+        }
+    }
 }
 const normalizePrice = (price: string): number => +price.replace(',', '.')
 const getRetailerPrice = (retailer: string, offers: CeneoOffer[]): number | void => { const obj = offers.find(el => el.retailer.match(retailer)); if (obj) return obj.price; }
@@ -23,7 +34,7 @@ const getProductName = ($): string => $(".product-name").eq(0).text()
 const getProductPrice = ($): number => normalizePrice($('span.price').eq(0).text())
 const getOffers = ($): CeneoOffer[] => {
     const scrapedOffersNoCheerio = []
-    $('.product-offer').each(function () {
+    $(OFFER_SELECTOR).each(function () {
         const thisInContext = $(this)
         scrapedOffersNoCheerio.push({ price: normalizePrice(thisInContext.attr('data-price')), retailer: thisInContext.attr('data-shopurl') })
     })
